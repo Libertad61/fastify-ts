@@ -1,4 +1,15 @@
-function sum (num1:number, num2:number){
-    return num1 + num2;
-}
-console.log(sum(8,4))
+import fastify from 'fastify'
+
+const server = fastify({logger:true})
+
+server.get('/ping', async (request, reply) => {
+  return 'pong\n'
+})
+
+server.listen({ port: 8080 }, (err, address) => {
+  if (err) {
+    console.error(err)
+    process.exit(1)
+  }
+  console.log(`Server listening at ${address}`)
+})
