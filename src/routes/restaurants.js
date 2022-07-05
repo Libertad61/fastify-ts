@@ -4,16 +4,12 @@
  * @param {Object} options plugin options, refer to https://www.fastify.io/docs/latest/Reference/Plugins/#plugin-options
  */
 
-async function routes(fastify, options) {
-  const collection = fastify.mongo.mongo1.db.collection("planets")
+async function resto(fastify, options) {
+  const collection = fastify.mongo.mongo2.db.collection("restaurants")
 
-  fastify.get("/", async (request, reply) => {
-    return { name: "james", age: 34, city: "Toulon" }
-  })
-
-  fastify.get("/planets", async function (request, reply) {
+  fastify.get("/", async function (request, reply) {
     try {
-      const planets = await collection.find({}).toArray()
+      const planets = await collection.find({}).limit(10).toArray()
       return await planets
     } catch (error) {
       throw new Error("Something went wrong..." + error)
@@ -61,4 +57,4 @@ async function routes(fastify, options) {
   })
 }
 
-module.exports = routes
+module.exports = resto

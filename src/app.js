@@ -7,6 +7,7 @@ const fastify = require("fastify")({
 
 fastify.register(require("./utils/mongo"))
 fastify.register(require("./routes/root"), { prefix: "/api" })
+fastify.register(require("./routes/restaurants"), { prefix: "/resto" })
 
 const start = async () => {
   try {
